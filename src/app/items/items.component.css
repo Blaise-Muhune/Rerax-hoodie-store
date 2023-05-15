@@ -1,0 +1,24 @@
+
+  .items-container{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(255, 255, 255);
+    flex-wrap:wrap;
+}
+
+
+.item-container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-basis: calc(33% - 10px);
+    margin: 1px;
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.089);
+    border-radius: 10px;
+}
+
+.item-container:hover .hover-item-element{
+    display: flex;
+}
+
+

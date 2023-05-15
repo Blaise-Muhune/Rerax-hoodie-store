@@ -1,18 +1,36 @@
-<div class="items-container">
+<div class="item-container">
 
+    <div class="img">
+        <img class="item-image" [src]="item.imgUrl" [alt]="item.name">
+    </div>
+    <div class="hover-item-element">
+        <p class="description">{{item.description}}</p>
+        <div class="price-and-button">
     
-    <div class="item-container" *ngFor = "let item of items">
-            <div class="img">
-                <img [src]="item.imgUrl" [alt]="item.name" width="200">
-            </div>
-            <div class="bottom-item">
-                <div class="desc-and-price">
-                    <p class="description">{{item.description}}</p>
-                    <p>{{item.price | currency}}</p>
-                </div>
-                <button (click)="handleClick()">add to cart</button>
-            
+        
+        <div class="prices-container">
+            <p class="price">{{item.price | currency}}</p>
+            <p class=" price-off">{{item.price | currency}}</p>
+        </div>
+        
+        <div>
+            <button class="add-cart-button" (click)="handleClick()">Add to cart</button>
+            <button class="add-cart-button" (click)="handleClick()">Buy now</button>
         </div>
     </div>
     
+    </div>
+    <div class="bottom-item">
+            <p class="description">{{item.description}}</p>
+            <div class="prices-container">
+                <p class="price">{{item.price | currency}}</p>
+                <p class=" price-off">{{item.price | currency}}</p>
+            </div>
+            
+            <div>
+                <button class="add-cart-button" (click)="handleClick()">Add to cart</button>
+        <button class="add-cart-button" (click)="handleClick()">Buy now</button>
+            </div>
+        
+    </div>
 </div>
