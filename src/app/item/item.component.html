@@ -1,36 +1,102 @@
 <div class="item-container">
+  <div class="img">
+    <img
+      [routerLink]="['/product', item.id]"
+      class="item-image"
+      [src]="item.imgUrl"
+      [alt]="item.name"
+    />
+  </div>
+  <div class="hover-item-element">
+    <p [routerLink]="['/product', item.id]" class="description">
+      {{ item.name }}
+    </p>
+    <div class="price-and-button">
+      <div class="prices-container">
+        <p class="price">{{ item.price | currency }}</p>
+        <p class="price-off">{{ item.price | currency }}</p>
+      </div>
 
-    <div class="img">
-        <img class="item-image" [src]="item.imgUrl" [alt]="item.name">
-    </div>
-    <div class="hover-item-element">
-        <p class="description">{{item.description}}</p>
-        <div class="price-and-button">
-    
-        
-        <div class="prices-container">
-            <p class="price">{{item.price | currency}}</p>
-            <p class=" price-off">{{item.price | currency}}</p>
+      <div class="">
+        <div class="add-buy-buttons">
+          <button class="add-cart-button" (click)="handleClick()">
+            Add to cart
+          </button>
+          <button class="add-cart-button" (click)="handleClick()">
+            Buy now
+          </button>
         </div>
-        
-        <div>
-            <button class="add-cart-button" (click)="handleClick()">Add to cart</button>
-            <button class="add-cart-button" (click)="handleClick()">Buy now</button>
+        <div
+          *ngIf="!isWished"
+          (click)="handleAddToWishlist()"
+          class="add-to-wishlist"
+        >
+          <mat-icon
+            style="margin-bottom: -7px"
+            class="add-wishlist-icon"
+            fontIcon="favorite_outline"
+          ></mat-icon>
         </div>
+        <div
+          *ngIf="isWished"
+          (click)="handleAddToWishlist()"
+          class="add-to-wishlist"
+        >
+          <mat-icon
+            style="margin-bottom: -7px"
+            class="add-wishlist-icon"
+            fontIcon="favorite"
+          ></mat-icon>
+        </div>
+      </div>
     </div>
-    
+  </div>
+  <div class="bottom-item">
+    <div style="display: flex; flex-direction: row; width: 90%">
+      <div class="prices-container">
+        <p class="price">{{ item.price | currency }}</p>
+        <p class="price-off">{{ item.price | currency }}</p>
+      </div>
+
+      <p [routerLink]="['/product', item.id]" class="description">
+        {{ item.name }}
+      </p>
     </div>
-    <div class="bottom-item">
-            <p class="description">{{item.description}}</p>
-            <div class="prices-container">
-                <p class="price">{{item.price | currency}}</p>
-                <p class=" price-off">{{item.price | currency}}</p>
-            </div>
-            
-            <div>
-                <button class="add-cart-button" (click)="handleClick()">Add to cart</button>
+    <!-- <p class="description">{{ item.description }}</p>
+    <div class="prices-container">
+      <p class="price">{{ item.price | currency }}</p>
+      <p class="price-off">{{ item.price | currency }}</p>
+    </div> -->
+
+    <div (click)="handleNun($event)" class="item-buttons-small-screen">
+      <div class="add-buy-buttons">
+        <button class="add-cart-button" (click)="handleClick()">
+          Add to cart
+        </button>
         <button class="add-cart-button" (click)="handleClick()">Buy now</button>
-            </div>
-        
+      </div>
+      <div
+        *ngIf="!isWished"
+        (click)="handleAddToWishlist()"
+        class="add-to-wishlist"
+      >
+        <mat-icon
+          style="margin-bottom: -7px"
+          class="add-wishlist-icon"
+          fontIcon="favorite_outline"
+        ></mat-icon>
+      </div>
+      <div
+        *ngIf="isWished"
+        (click)="handleAddToWishlist()"
+        class="add-to-wishlist"
+      >
+        <mat-icon
+          style="margin-bottom: -7px"
+          class="add-wishlist-icon"
+          fontIcon="favorite"
+        ></mat-icon>
+      </div>
     </div>
+  </div>
 </div>

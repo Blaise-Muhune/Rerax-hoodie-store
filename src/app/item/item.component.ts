@@ -1,23 +1,29 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ProductService } from '../product.service';
 import { Item } from '../types/Item';
 
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
-  styleUrls: ['./item.component.css']
+  styleUrls: ['./item.component.css'],
 })
-
-
-
 export class ItemComponent {
- @Input() item: Item = {} as Item;
+  @Input() item: Item = {} as Item;
 
- constructor(){}
+  isWished = false;
+  constructor() {}
 
- ngOnInit():void{}
- handleClick(){
+  ngOnInit(): void {}
+  handleClick() {
+    console.log('holla');
+  }
 
-  console.log('holla');
-  
-}
+  handleAddToWishlist() {
+    this.isWished = !this.isWished;
+  }
+
+  handleNun(event: Event) {
+    event.stopPropagation();
+  }
 }

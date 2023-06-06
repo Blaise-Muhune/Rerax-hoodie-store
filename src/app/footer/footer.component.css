@@ -1,0 +1,33 @@
+footer {
+  position: unset;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(4, 5, 5);
+  bottom: 0;
+}
+
+footer > * {
+  color: rgb(207, 203, 203);
+  font-size: 12px;
+  font-family: Noto Sans, sans-serif;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  cursor: pointer;
+}
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+}
+
+.footer-contact-us-block {
+  display: flex;
+}

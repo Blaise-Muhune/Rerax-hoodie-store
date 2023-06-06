@@ -1,13 +1,10 @@
-import { Component } from '@angular/core';
-import { Item } from '../types/Item';
+import { Injectable } from '@angular/core';
 
-@Component({
-  selector: 'app-items',
-  templateUrl: './items.component.html',
-  styleUrls: ['./items.component.css'],
+@Injectable({
+  providedIn: 'root',
 })
-export class ItemsComponent {
-  items: Item[] = [
+export class ProductService {
+  private Items: any[] = [
     {
       id: 1,
       name: 'Black_Hoodie',
@@ -80,13 +77,23 @@ export class ItemsComponent {
       price: 40,
       description: 'Orange hoodie with a black pattern on the front',
     },
+    {
+      id: 10,
+      name: 'Orange_Hoodie',
+      imgUrl:
+        'https://images.unsplash.com/photo-1633292750937-120a94f5c2bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+      price: 40,
+      description: 'Orange hoodie with a black pattern on the front',
+    },
   ];
-
-  cart: string[] = [];
 
   constructor() {}
 
-  ngOnInit(): void {}
+  getAllProducts(): any[] {
+    return this.Items;
+  }
 
-  handleItemClick() {}
+  getProductById(id: number): any {
+    return this.Items.find((item) => item.id === id);
+  }
 }

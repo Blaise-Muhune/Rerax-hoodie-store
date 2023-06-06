@@ -1,0 +1,40 @@
+<div class="cart">
+  <div class="item">
+    <div class="images">
+      <div (click)="scrollToPreviousElement()" class="before-pic">
+        <mat-icon fontIcon="navigate_before"></mat-icon>
+      </div>
+      <div (click)="scrollToNextElement()" class="next-pic">
+        <mat-icon fontIcon="navigate_next"></mat-icon>
+      </div>
+      <div #element1 #scrollElement class="image-container">
+        <img src="{{ item.imgUrl }}" alt="" />
+      </div>
+      <div #element2 #scrollElement class="image-container">
+        <img src="{{ item.imgUrl }}" alt="" />
+      </div>
+      <div #element3 #scrollElement class="image-container">
+        <img src="{{ item.imgUrl }}" alt="" />
+      </div>
+    </div>
+    <div class="description-item">
+      <div>
+        <div class="product-name">{{ item.name }}</div>
+        <span>5 ratings</span>
+        <span style="color: green"> {{ item.price | currency }} </span>
+        <div class="long-desc">{{ item.description }}</div>
+        <div class="actions">
+          <div class="counter">
+            <button (click)="decrementCounter()">-</button>
+            <span> {{ counter }}</span>
+            <button (click)="incrementCounter()">+</button> __item(s)
+          </div>
+          <div>
+            <button class="buy-now">buy-now</button>
+            <button class="add-cart">add to cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

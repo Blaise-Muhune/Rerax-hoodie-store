@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Item } from '../types/Item';
 
 @Component({
-  selector: 'app-items',
-  templateUrl: './items.component.html',
-  styleUrls: ['./items.component.css'],
+  selector: 'app-wishlist',
+  templateUrl: './wishlist.component.html',
+  styleUrls: ['./wishlist.component.css'],
 })
-export class ItemsComponent {
+export class WishlistComponent {
   items: Item[] = [
     {
       id: 1,
@@ -81,12 +81,4 @@ export class ItemsComponent {
       description: 'Orange hoodie with a black pattern on the front',
     },
   ];
-
-  cart: string[] = [];
-
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  handleItemClick() {}
 }

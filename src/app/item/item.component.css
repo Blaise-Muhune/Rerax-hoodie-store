@@ -1,161 +1,194 @@
-.item-container{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    flex-basis: calc(33% - 10px);
-    margin: 1px;
-    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.089);
-    border-radius: 10px;
+.item-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-basis: calc(33% - 10px);
+  margin: 1px;
+  /* box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.089); */
+  /* border-radius: 10px; */
 }
 
-.item-container:hover .hover-item-element{
-    display: flex;
+.item-container > * {
+  font-family: "Roboto", sans-serif;
+}
+
+.item-container:hover .hover-item-element {
+  display: flex;
 }
 
 .hover-item-element {
-    position: absolute; 
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 30%;
-    padding-bottom: 10px;
-    background-color: rgba(0, 0, 0, 0.685); 
-    display: none; 
-    justify-content: center; 
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-  }
-
-
-.img{
-    width: 100%; 
-    height: 50vh;
-    position: relative; 
-    display: flex;
-    flex-direction: column;
-    justify-content:space-between;
-    align-items:start;
-
-    
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  padding-bottom: 10px;
+  background-color: rgba(0, 0, 0, 0.685);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
 }
 
-.item-image{
+.img {
+  /* width: 33.3vw; */
+  height: 55vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  overflow: hidden;
+}
+
+.item-image {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
 }
 
-.price{
-    font-weight: bold;
-    font-size: 14px;
-    color: rgb(221, 221, 221);
-    margin-bottom: -10px;
+.price {
+  font-weight: bold;
+  font-size: 14px;
+  color: rgb(221, 221, 221);
+  margin-bottom: -10px;
 }
 
-.price-off{
-    text-decoration: line-through;
-    font-size: 12px;
-    color: rgb(124, 124, 124);
+.price-off {
+  text-decoration: line-through;
+  font-size: 12px;
+  color: rgb(124, 124, 124);
 }
 
-.price-and-button{
-    width: 60%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+.price-and-button {
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
-
-.item-buttons{
-    visibility: hidden;
-    margin-bottom: 5px;
-
+.item-buttons-small-screen {
+  visibility: hidden;
+  /* margin-bottom: 5px; */
 }
 
-
-.add-cart-button{
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    color: rgb(247, 174, 18);
-    font-weight: bolder;
-    font-size: 10px;
-    padding: 7px;
-    border-radius: 7px;
-
+.add-cart-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: rgb(226, 155, 0);
+  font-weight: bold;
+  font-size: 10px;
+  padding: 7px;
+  border-radius: 7px;
 }
 
-
-.add-cart-button:hover{
-    color: rgb(224, 224, 224);
-    background-color: rgba(255, 255, 255, 0.219);
+.add-cart-button:hover {
+  color: rgb(224, 224, 224);
+  background-color: rgba(255, 255, 255, 0.219);
 }
 
-.bottom-item{
-    
-    visibility: hidden;
-    position:absolute;
-
+.bottom-item {
+  /* visibility: hidden; */
+  /* position: absolute; */
+  display: none;
 }
 
-  
-.desc-and-price{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.desc-and-price {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.description{
-    display: flex;
-    color: rgb(218, 218, 218);
-    font-size: 12px;
-    text-align: center;
-    width: 160px;
+.description {
+  display: flex;
+  color: rgb(218, 218, 218);
+  font-size: 12px;
+  text-align: center;
+  width: 160px;
+  font-family: "Roboto", sans-serif;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.prices-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: space-between; */
+  /* border-right: 1px solid rgba(0, 0, 0, 0.356); */
+}
+
+.item-buttons-small-screen {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.171);
+  /* background-color: rgb(95, 64, 64); */
+  /* z-index: 99; */
+}
+
+.add-wishlist-icon {
+  font-size: 18px;
+  cursor: pointer;
+  color: rgb(32, 113, 218);
+}
+
+.add-cart-button,
+.add-wishlist-icon {
+  /* z-index: 99; */
 }
 
 @media screen and (max-width: 768px) {
-    
-    .item-buttons{
-        position: relative ;
-        visibility: visible ;
-    }
-    .bottom-item{
+  .item-buttons-small-screen {
+    position: relative;
+    visibility: visible;
+  }
+  .bottom-item {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    position: relative ;
-    visibility: visible ;
-    }
-    .hover-item-element{
-        display: none;
-    }
-
-    .item-container {
-        flex-basis: calc(50% - 10px); 
-      }
-      .item-container:hover .hover-item-element{
-          display: none;
-      }
-
-    .img{
-        height: 35vh ;
-    }
-
-    .price{
-        color: rgb(15, 15, 15);
-    }
-    
-    .price-off{
-        color: rgb(155, 155, 155);
-    }
-    .description{
-        color: black
-    }
-    
+    /* align-items: center; */
+    position: relative;
   }
+  .hover-item-element {
+    display: none;
+  }
+
+  .item-container {
+    flex-basis: calc(50% - 10px);
+  }
+  .item-container:hover .hover-item-element {
+    display: none;
+  }
+
+  .img {
+    height: 35vh;
+  }
+
+  .price {
+    color: rgb(15, 15, 15);
+  }
+
+  .price-off {
+    color: rgb(155, 155, 155);
+  }
+  .description {
+    color: black;
+    margin-top: 10px;
+    margin-left: -30px;
+    cursor: pointer;
+  }
+
+  .prices-container {
+    margin-top: -20px;
+    background-color: rgb(255, 255, 255);
+  }
+}
