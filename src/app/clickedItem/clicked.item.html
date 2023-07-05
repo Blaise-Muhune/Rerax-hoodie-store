@@ -18,17 +18,37 @@
       </div>
     </div>
     <div class="description-item">
+      <div class="size-bubble-container">
+        <div
+          *ngFor="let size of sizes"
+          (click)="handleAddToCart(getSizeId.innerText)"
+          class="each-size-label"
+        >
+          <div #getSizeId>{{ size.nameSize }}</div>
+          <span
+            *ngFor="let pairedSizeInfo of item.size"
+            class="number-item-size"
+          >
+            {{ pairedSizeInfo[0] == size.nameSize ? pairedSizeInfo[1] : null }}
+          </span>
+        </div>
+        <div
+          style="color: rgb(233, 181, 37); padding-left: 10px; cursor: pointer"
+        >
+          go to cart
+        </div>
+      </div>
       <div>
         <div class="product-name">{{ item.name }}</div>
         <span>5 ratings</span>
         <span style="color: green"> {{ item.price | currency }} </span>
         <div class="long-desc">{{ item.description }}</div>
         <div class="actions">
-          <div class="counter">
+          <!-- <div class="counter">
             <button (click)="decrementCounter()">-</button>
             <span> {{ counter }}</span>
             <button (click)="incrementCounter()">+</button> __item(s)
-          </div>
+          </div> -->
           <div>
             <button class="buy-now">buy-now</button>
             <button class="add-cart">add to cart</button>

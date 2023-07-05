@@ -11,11 +11,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import { ClickItem } from './cart/clicked.item';
+import { ClickItem } from './clickedItem/clicked.item';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { ProductService } from './product.service';
 import { CartComponent } from './cart/cart.component';
+import { CartItemComponent } from './cart-item/cart-item.component';
+import { BuyPageComponent } from './buy-page/buy-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +29,8 @@ import { CartComponent } from './cart/cart.component';
     WishlistComponent,
     MyAccountComponent,
     CartComponent,
+    CartItemComponent,
+    BuyPageComponent,
   ],
   imports: [
     BrowserModule,

@@ -50,7 +50,7 @@
   justify-content: center;
   position: absolute;
   cursor: pointer;
-  z-index: 999;
+  z-index: 99;
   /* border: 1px solid rgb(0, 0, 0); */
   opacity: 0.4;
   border-radius: 15px;
@@ -78,6 +78,23 @@ img {
   top: 40px;
 }
 
+.size-bubble-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.each-size-label {
+  display: flex;
+  border: 1px solid black;
+  padding: 2px 10px 2px 10px;
+  border-radius: 10px;
+}
+
+.each-size-label:hover {
+  background-color: rgb(245, 245, 245);
+  cursor: pointer;
+}
+
 .image-container:hover img {
 }
 
@@ -93,7 +110,7 @@ img {
   .image-container:hover {
     transform: scale(1);
 
-    z-index: 99;
+    /* z-index: 99; */
     left: 0;
   }
 

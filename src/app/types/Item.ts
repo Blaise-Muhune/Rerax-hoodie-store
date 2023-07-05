@@ -4,4 +4,13 @@ export interface Item {
   imgUrl: string;
   price: number;
   description: string;
+  isWished: boolean;
+  recentlyVisited: boolean;
+  cartInfo: {
+    addedToCart: boolean;
+    addedTocartDate: string;
+    howMany: number;
+  };
+  size: [[string, number]];
+  currentIndex: [number];
 }

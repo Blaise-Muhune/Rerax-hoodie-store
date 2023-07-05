@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ClickItem } from './cart/clicked.item';
+import { ClickItem } from './clickedItem/clicked.item';
 import { ItemsComponent } from './items/items.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { MyAccountComponent } from './my-account/my-account.component';

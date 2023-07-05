@@ -1,10 +1,11 @@
 footer {
-  position: unset;
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: rgb(4, 5, 5);
   bottom: 0;
+  width: 100%;
 }
 
 footer > * {

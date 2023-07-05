@@ -1,0 +1,26 @@
+.everything {
+  position: relative;
+  min-height: 100vh;
+}
+
+.middle-content {
+  padding-bottom: 200px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  z-index: 98;
+}
+
+.visible {
+  transform: translateY(0);
+  transition: transform 0.3s;
+}
+
+.hidden {
+  transform: translateY(-100%);
+  transition: transform 0.3s;
+}

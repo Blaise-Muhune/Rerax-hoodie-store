@@ -1,1 +1,24 @@
-<p>cart works!</p>
+<div class="items-container">
+  <h2 *ngIf="items.length == 0">
+    Nothing as been added cart. see all the product
+    <a routerLink="/">here...</a>
+  </h2>
+
+  <div class="item-container" *ngFor="let item of items">
+    <!-- <app-item [item]="item"></app-item> -->
+    <!-- <div class="item-goup-by-size">{{ item.name }}</div> -->
+    <app-cart-item
+      [item]="item"
+      (removeFromCart)="getUpdatedTotal($event)"
+      (addRemoveOnchange)="getUpdatedTotal($event)"
+    ></app-cart-item>
+  </div>
+
+  <div class="checkout">
+    <div class="total-label">Total: {{ total | currency }}</div>
+    <div class="checkout-clearcart-container">
+      <div (click)="removeAll()" class="clear-cart-button">clear cart</div>
+      <div class="checkout-label">Checkout</div>
+    </div>
+  </div>
+</div>
