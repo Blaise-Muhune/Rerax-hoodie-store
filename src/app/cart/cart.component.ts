@@ -9,17 +9,14 @@ import { ProductService } from '../product.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent {
+  items: Item[] = this.cartService.getCartItems();
+  total: number = this.cartService.getTotalCartItems();
+  nameItems: string[] = [];
+
   constructor(
     private cartService: CartService,
     private productService: ProductService
   ) {}
-  total: number = this.cartService.getTotalCartItems();
-  nameItems: string[] = [];
-
-  // items: Item[] = this.productService.getAllProducts();
-  items: Item[] = this.cartService.getCartItems();
-
-  // itemsUsedElementToRender: Item[] = [];
 
   ngOnInit(): void {
     // this.items.forEach((item) => {

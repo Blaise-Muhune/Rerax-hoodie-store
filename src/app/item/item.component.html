@@ -23,7 +23,7 @@
           <button class="add-cart-button" (click)="showSizeContainer()">
             add to cart
           </button>
-          <button class="add-cart-button" (click)="handleClick()">
+          <button class="add-cart-button" (click)="onItemClick(item)">
             Buy now
           </button>
         </div>
@@ -47,20 +47,25 @@
         [style.visibility]="isSizeContainerHidden ? 'hidden' : 'visible'"
         class="size-bubble-container"
       >
-        <div
-          *ngFor="let size of sizes"
-          (click)="handleAddToCart(getSizeId.innerText)"
-          class="each-size-label"
-        >
-          <div #getSizeId>{{ size.nameSize }}</div>
-          <span
-            *ngFor="let pairedSizeInfo of item.size"
-            class="number-item-size"
+        <div *ngFor="let size of sizes">
+          <button
+            *ngIf="size.includeThisSize"
+            (click)="handleAddToCart(getSizeId.innerText)"
+            class="each-size-label"
           >
-            {{ pairedSizeInfo[0] == size.nameSize ? pairedSizeInfo[1] : null }}
-          </span>
+            <div #getSizeId>{{ size.nameSize }}</div>
+            <span
+              *ngFor="let pairedSizeInfo of item.size"
+              class="number-item-size"
+            >
+              {{
+                pairedSizeInfo[0] == size.nameSize ? pairedSizeInfo[1] : null
+              }}
+            </span>
+          </button>
         </div>
         <div
+          [routerLink]="['/cart']"
           style="color: rgb(233, 181, 37); padding-left: 10px; cursor: pointer"
         >
           go to cart

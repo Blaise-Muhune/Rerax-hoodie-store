@@ -10,7 +10,7 @@
 <div class="payment-body">
   <div class="checkout-info">
     <div style="padding: 5px">Checkout</div>
-    <table>
+    <table class="tr-container" *ngFor="let item of items">
       <tr>
         <th></th>
         <th></th>
@@ -18,22 +18,19 @@
         <th></th>
         <th></th>
       </tr>
-      <tr>
+      <tr *ngFor="let arrayItem of item.size">
         <td>
           <div style="font-weight: bold; color: rgb(112, 112, 112)">+</div>
         </td>
-        <td>{{ howMany }}</td>
-        <td>{{ size }}</td>
+        <td>{{ arrayItem[1] }}</td>
+        <td>{{ arrayItem[0] }}</td>
         <td>{{ item.name }}</td>
         <td>{{ item.price | currency }}</td>
       </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td style="font-weight: bold">Total</td>
-        <td>{{ total | currency }}</td>
-      </tr>
     </table>
+    <div class="total-container">
+      <b>Total:</b>
+      <div>{{ total }}</div>
+    </div>
   </div>
 </div>

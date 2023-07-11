@@ -1,0 +1,63 @@
+<div class="account-main-container">
+  <div class="sign-up" *ngIf="haveAccount == false">
+    <div class="form">
+      <input placeholder="First Name" type="text" name="" #firstname />
+      <input placeholder="Last Name" type="text" name="" #lastname />
+      <input placeholder="Email address" type="text" name="" #email />
+      <input placeholder="Password" type="password" name="" #password />
+      <button
+        (click)="
+          signup(firstname.value, lastname.value, password.value, email.value)
+        "
+        type="submit"
+      >
+        Sign Up
+      </button>
+      <div class="login-link">
+        Already have an account? <span (click)="showLogin()">Login</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="log-in" *ngIf="haveAccount == true && loggedIn == false">
+    <div class="form">
+      <input placeholder="Email address" type="text" name="email" #emailLogin />
+      <input
+        placeholder="Password"
+        type="password"
+        name="email"
+        #passWordLogin
+      />
+      <button
+        (click)="login(emailLogin.value, passWordLogin.value)"
+        type="submit"
+      >
+        Log in
+      </button>
+      <div class="signup-link">
+        Don't have an account? <span (click)="showSignUp()">Sign up</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="my-account-info" *ngIf="haveAccount == true && loggedIn == true">
+    <div class="profile">
+      <div class="profile-picture">
+        <img
+          src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=divat&fit=crop&w=870&q=80"
+          alt=""
+        />
+      </div>
+      <div class="name">Name</div>
+      <div class="bonus-point">23 points</div>
+      <div class="edit">Edit</div>
+    </div>
+    <div class="action-from-account">
+      <button class="cart">Cart</button>
+      <button class="wishlist">Wishlist</button>
+      <button>Delete Account</button>
+    </div>
+  </div>
+</div>
+
+<div></div>

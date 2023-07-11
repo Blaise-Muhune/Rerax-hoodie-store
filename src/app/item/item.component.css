@@ -14,7 +14,7 @@
 
 .item-container:hover .hover-item-element {
   height: 120px;
-  background-color: rgba(0, 0, 0, 0.945);
+  background-color: rgba(0, 0, 0, 0.842);
 }
 
 .hover-item-element {
@@ -29,7 +29,7 @@
   width: 100%;
   height: 115px;
   padding-bottom: 10px;
-  background-color: rgba(0, 0, 0, 0.685);
+  background-color: rgba(0, 0, 0, 0.281);
   transition: height 0.5s;
 }
 
@@ -41,7 +41,7 @@
 
 .img {
   /* width: 33.3vw; */
-  height: 55vh;
+  height: 80vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -143,7 +143,8 @@
 
 .each-size-label {
   display: flex;
-
+  background-color: transparent;
+  border: none;
   padding: 5px 10px;
   margin: 0px 14px;
   color: white;
@@ -153,6 +154,11 @@
   cursor: pointer;
   /* width: 45%; */
   border-right: 1px solid aliceblue;
+  position: relative;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
 }
 
 .each-size-label > * {
@@ -160,6 +166,30 @@
 }
 .each-size-label:hover {
   color: rgb(255, 211, 146);
+}
+
+.each-size-label:after {
+  content: "added";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: rgb(0, 0, 0);
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: all 1.2s;
+}
+
+.each-size-label:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s;
 }
 
 .desc-and-price {

@@ -10,39 +10,41 @@ export class CartService {
 
   private cartItems: Item[] = [];
   private cartBysizeArr: any[] = [];
-
+  sizes: any[] = ['XS', 'S', 'M', 'L', 'XL', '2XL'];
   addToCart(item: Item, sizeId: string) {
     let newSize = false;
-    if (this.cartItems.includes(item)) {
-      console.log(sizeId);
-      console.log('true it includs');
+    if (this.sizes.includes(sizeId)) {
+      if (this.cartItems.includes(item)) {
+        console.log(sizeId);
+        console.log('true it includs');
 
-      item.size.forEach((sizeItem) => {
-        const sizeItemSize = sizeItem[0];
-        const sizeItemValue = sizeItem[1];
+        item.size.forEach((sizeItem) => {
+          const sizeItemSize = sizeItem[0];
+          const sizeItemValue = sizeItem[1];
 
-        if (sizeItemSize === sizeId) {
-          console.log('true it equal');
+          if (sizeItemSize === sizeId) {
+            console.log('true it equal');
 
-          // Modify the number based on your requirements
-          // For example, increment the value by 1
-          sizeItem[1]++;
-          this.total += item.price;
-          newSize = true;
-        }
-      });
+            // Modify the number based on your requirements
+            // For example, increment the value by 1
+            sizeItem[1]++;
+            this.total += item.price;
+            newSize = true;
+          }
+        });
 
-      !newSize ? item.size.unshift([sizeId, 1]) : null;
-    } else {
-      console.log('no he dont');
+        !newSize ? item.size.unshift([sizeId, 1, true]) : null;
+      } else {
+        console.log('no he dont');
 
-      this.cartItems.unshift(item);
-      item.size[0][0] = sizeId;
-      item.size[0][1] = 1;
-      this.total += item.price;
+        this.cartItems.unshift(item);
+        item.size[0][0] = sizeId;
+        item.size[0][1] = 1;
+        this.total += item.price;
+      }
+      this.getTotalCartItems();
+      this.calculateTotal;
     }
-    this.getTotalCartItems();
-    this.calculateTotal;
   }
 
   getCartItems() {

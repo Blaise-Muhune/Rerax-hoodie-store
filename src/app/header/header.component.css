@@ -40,9 +40,10 @@
 }
 .header-3 {
   justify-content: end;
+  align-items: end;
 }
 .each-h-container > * {
-  margin: 10px;
+  margin: 5px;
   font-size: 12px;
   cursor: pointer;
 }
@@ -106,7 +107,7 @@
   top: 0;
   width: 200px;
   height: 100vh;
-  z-index: 99;
+  z-index: 1000;
   background-color: rgb(248, 249, 250);
   transition: transform 0.3s ease-in-out;
   transform: translateX(-100%);

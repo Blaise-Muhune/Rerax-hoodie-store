@@ -2,31 +2,38 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { Item } from '../types/Item';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CartService } from '../cart.service';
 
 @Component({
-  selector: 'app-cart-buy-page',
-  templateUrl: './buy-page.component.html',
-  styleUrls: ['./buy-page.component.css'],
+  selector: 'app-buy-page',
+  templateUrl: './cart-buy-page.component.html',
+  styleUrls: ['./cart-buy-page.component.css'],
 })
-export class BuyPageComponent implements OnInit {
-  @Input() item: Item = {} as Item;
-  howMany: number = 1;
-  total: number = 0;
-  size: string = '';
+export class CartBuyPageComponent implements OnInit {
+  items: Item[] = this.cartService.getCartItems();
+  // items: Item[] = [];
+  total: number = this.cartService.getTotalCartItems();
+
+  ///////////////////////////////////////////
   public payPalConfig?: IPayPalConfig;
 
   showSuccess: boolean = false;
   showCancel: boolean = false;
   showError: boolean = false;
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
-    this.initConfig();
-    this.item = history.state.item;
-    this.howMany = history.state.howMany == 0 ? 1 : history.state.howMany;
-    this.total = this.item.price * this.howMany;
+    this.total = this.cartService.getTotalCartItems();
+    // for (let item of this.cartService.getCartItems()) {
+    //   for (let element of item.size) {
+    //     this.items.push(element);
+    //   }
+    // }
 
-    this.size = history.state.clickedActiveSize;
+    this.initConfig();
   }
 
   private initConfig(): void {

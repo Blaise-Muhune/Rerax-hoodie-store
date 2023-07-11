@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../cart.service';
 import { WishlistService } from '../wishlist.service';
 import { Item } from '../types/Item';
@@ -18,69 +18,54 @@ export class ItemComponent {
   sizeIndexToBeSent: number = 0;
   sizeIndex: number = -1;
 
-  sizes: any[] = [
-    {
-      nameSize: 'XS',
-      howMany: 0,
-    },
-    {
-      nameSize: 'S',
-      howMany: 0,
-    },
-    {
-      nameSize: 'M',
-      howMany: 0,
-    },
-
-    {
-      nameSize: 'L',
-      howMany: 0,
-    },
-
-    {
-      nameSize: 'XL',
-      howMany: 0,
-    },
-
-    {
-      nameSize: '2XL',
-      howMany: 0,
-    },
-  ];
+  sizes: any[] = [];
   constructor(
     private wishlistService: WishlistService,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  onItemClick(item: Item): void {
+    this.router.navigate(['/buy', this.item.id], { state: { item } });
+  }
+
   handleClick() {
-    // console.log('holla');
+    console.log('holla');
+  }
+  ngOnInit(): void {
+    this.sizes = [
+      {
+        nameSize: 'XS',
+        includeThisSize: this.item.xs,
+      },
+      {
+        nameSize: 'S',
+        includeThisSize: this.item.s,
+      },
+      {
+        nameSize: 'M',
+        includeThisSize: this.item.m,
+      },
+
+      {
+        nameSize: 'L',
+        includeThisSize: this.item.l,
+      },
+
+      {
+        nameSize: 'XL',
+        includeThisSize: this.item.xl,
+      },
+
+      {
+        nameSize: '2XL',
+        includeThisSize: this.item.xxl,
+      },
+    ];
   }
 
   handleAddToCart(sizeId: string) {
     this.cartService.addToCart(this.item, sizeId);
-
-    // this.item.size[0] = sizeId;
-    // console.log(sizeId);
-    // if (
-    /* [0: 'label', 1:'number item'] */
-    //   !this.cartService.getCartBySizeValue().includes(this.item.size[0])
-    // ) {
-    //   this.cartService.getCartBySize();
-    // console.log(this.item.size[0]);
-    // have to change back the '==1' to 0
-    //   this.cartService.addToCart(this.item);
-    //   this.item.size[1]++;
-    // console.log(this.cartService.getCartBySizeValue());
-    // } else if (
-    //   this.cartService.getCartBySizeValue().includes(this.item.size[0])
-    // ) {
-    //   this.cartService.getCartBySize();
-    // this.cartService.removeFromCart(this.item);
-    // this.item.size[1]++;
-    // console.log(this.item.size[0]);
-    // console.log(this.cartService.getCartBySize());
-    // }
   }
 
   handleAddToWishlist() {

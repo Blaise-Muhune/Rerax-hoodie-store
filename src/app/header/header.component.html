@@ -4,17 +4,15 @@
       <mat-icon fontIcon="close"></mat-icon>
     </div>
     <div class="menus-on-side-bar">
-      <div class="what-s-new s-b-menu">what's new</div>
-      <div class="deals s-b-menu">deals</div>
-      <div class="popular s-b-menu">popular</div>
+      <div class="what-s-new">recently visited</div>
+      <div class="deals">deals</div>
+      <div class="deals">privacy and security</div>
     </div>
   </div>
   <div class="header">
-    <div routerLink="/" routerLinkActive="active" class="logo">logo</div>
     <div class="header-menus">
       <div class="header-1 each-h-container">
-        <div class="menu">menu</div>
-        <div class="logo">logo</div>
+        <div routerLink="/" routerLinkActive="active" class="logo">logo</div>
       </div>
       <div class="each-h-container header-1-logo">
         <div (click)="toggleMenu()" class="menu-icon icon">
@@ -22,37 +20,22 @@
         </div>
       </div>
       <div class="header-2 each-h-container">
-        <div class="what-s-new">what's new</div>
+        <div class="what-s-new">recently visited</div>
         <div class="deals">deals</div>
-        <div class="popular">popular</div>
+        <!-- <div class="popular">popular</div> -->
       </div>
       <div class="header-3 each-h-container">
-        <div
-          routerLink="/wishlist"
-          routerLinkActive="active"
-          class="wishlist header-3-left"
-        >
+        <div routerLink="/wishlist" class="wishlist header-3-left">
           <mat-icon class="h-3-l-icon" fontIcon="favorite_outline"></mat-icon>
-          <!-- <span class="header-menu-text">wishlist</span> -->
         </div>
-        <div
-          routerLink="/cart"
-          routerLinkActive="active"
-          class="cart header-3-left"
-        >
+        <div (click)="navigateToAccount()" class="login header-3-left">
+          <mat-icon class="h-3-l-icon" fontIcon="person_outline"></mat-icon>
+        </div>
+        <div routerLink="/cart" class="cart header-3-left">
           <mat-icon
             class="h-3-l-icon"
             fontIcon="shopping_cart_checkout"
           ></mat-icon>
-          <!-- <span class="header-menu-text">cart</span> -->
-        </div>
-        <div
-          routerLink="/account"
-          routerLinkActive="active"
-          class="login header-3-left"
-        >
-          <mat-icon class="h-3-l-icon" fontIcon="person_outline"></mat-icon>
-          <!-- <span class="header-menu-text">account</span> -->
         </div>
       </div>
     </div>

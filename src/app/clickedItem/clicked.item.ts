@@ -9,7 +9,7 @@ import {
   Input,
 } from '@angular/core';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../product.service';
 import { CartService } from '../cart.service';
 import { Item } from '../types/Item';
@@ -24,46 +24,65 @@ export class ClickItem implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router
   ) {}
   itemId: number = 0;
   isSizeIdIncluded: boolean = false;
   sizeIndex: number = -1;
   currentIndex: number = 0;
-  sizes: any[] = [
-    {
-      nameSize: 'XS',
-      howMany: 0,
-    },
-    {
-      nameSize: 'S',
-      howMany: 0,
-    },
-    {
-      nameSize: 'M',
-      howMany: 0,
-    },
+  displayNumber: boolean = false;
+  sizeLabel: string = '';
+  clickedActiveSize: string = ''; //DEFAULT SELECTION
+  itemFromSize: any[] = ['', 0, false];
+  myInputChange!: number;
+  added: boolean = false;
 
-    {
-      nameSize: 'L',
-      howMany: 0,
-    },
-
-    {
-      nameSize: 'XL',
-      howMany: 0,
-    },
-
-    {
-      nameSize: '2XL',
-      howMany: 0,
-    },
-  ];
+  sizes: any[] = [];
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.itemId = +params['id'];
       this.item = this.productService.getProductById(this.itemId);
+    });
+    this.sizes = [
+      {
+        nameSize: 'XS',
+        includeThisSize: this.item.xs,
+      },
+      {
+        nameSize: 'S',
+        includeThisSize: this.item.s,
+      },
+      {
+        nameSize: 'M',
+        includeThisSize: this.item.m,
+      },
+
+      {
+        nameSize: 'L',
+        includeThisSize: this.item.l,
+      },
+
+      {
+        nameSize: 'XL',
+        includeThisSize: this.item.xl,
+      },
+
+      {
+        nameSize: '2XL',
+        includeThisSize: this.item.xxl,
+      },
+    ];
+    console.log(this.sizes[0].includeThisSize);
+  }
+
+  onItemClick(item: Item, howMany: Number, clickedActiveSize: string): void {
+    if (clickedActiveSize == '') {
+      alert('Must choose size first !');
+    }
+    this.router.navigate(['/buy', this.item.id], {
+      state: { item, howMany, clickedActiveSize },
     });
   }
 
@@ -73,6 +92,105 @@ export class ClickItem implements OnInit {
       inline: 'start',
     });
   }
+
+  clickedSizeLabelFunc(size: boolean): boolean {
+    return size;
+  }
+
+  getVisibilityOfItemNumber() {
+    if (this.clickedActiveSize == '') {
+    }
+  }
+
+  handleAddToCart(sizeId: string) {
+    this.cartService.addToCart(this.item, sizeId);
+    this.added = !this.added;
+    for (const size of this.item.size) {
+      if (size[0] == sizeId) {
+        this.itemFromSize[0] = size[0];
+        this.itemFromSize[1] = size[1];
+        break;
+      }
+    }
+    let bool = false;
+    for (let size of this.item.size) {
+      if (sizeId == size[0] && size[1] > 0) {
+        bool = true;
+      }
+    }
+    this.displayNumber = this.clickedActiveSize != '' && bool;
+  }
+
+  getSelectedSize(sizeLabel: string, includeThisSize: boolean) {
+    this.sizeLabel = includeThisSize ? sizeLabel : '';
+    this.clickedActiveSize = sizeLabel;
+    this.itemFromSize = ['', 0, false];
+    for (const size of this.item.size) {
+      if (size[0] == this.clickedActiveSize) {
+        this.itemFromSize[0] = size[0];
+        this.itemFromSize[1] = size[1];
+        this.itemFromSize[2] = size[2];
+        break;
+      }
+    }
+    if (this.itemFromSize[0] != '') {
+      for (const size of this.item.size) {
+        if (size[0] == this.clickedActiveSize) {
+          size[2] = true;
+          break;
+        }
+      }
+      this.displayNumber = true;
+    } else {
+      this.displayNumber = false;
+    }
+  }
+
+  getNumberItemFunc(clickedActiveSize: string) {
+    for (const size of this.item.size) {
+      if (size[0] == clickedActiveSize) {
+        this.itemFromSize[0] = size[0];
+        this.itemFromSize[1] = size[1];
+        break;
+      }
+    }
+  }
+
+  async onInputChange(event: Event, item: Item, clickedActiveSize: string) {
+    if (this.clickedActiveSize != '') {
+      for (const size of item.size) {
+        if (size[0] == '') {
+          size[0] = clickedActiveSize;
+        }
+        console.log(clickedActiveSize);
+        if (size[0] == clickedActiveSize) {
+          console.log(clickedActiveSize);
+          this.itemFromSize[0] = clickedActiveSize;
+          this.itemFromSize[1] = size[1];
+          break;
+        }
+      }
+      const input = event.target as HTMLInputElement;
+      input.addEventListener('input', () => {
+        let val = input.value;
+        val = val.replace(/[+-]/g, '');
+        input.value = val;
+      });
+      this.myInputChange = parseInt(input.value);
+      // console.log(this.myInputChange);
+      this.itemFromSize[1] = await this.myInputChange;
+
+      for (const size of this.item.size) {
+        if (size[0] == clickedActiveSize) {
+          size[0] = clickedActiveSize;
+          size[1] = this.itemFromSize[1];
+          break;
+        }
+        console.log(this.itemFromSize);
+      }
+    }
+  }
+  ////////////////////////////////////////////////////////////////////////////////////////////
 
   scrollToNextElement() {
     if (this.scrollElements.length === 0) {
@@ -110,42 +228,5 @@ export class ClickItem implements OnInit {
     if (this.counter > 1) {
       this.counter--;
     }
-  }
-
-  handleAddToCart(sizeId: string) {
-    this.cartService.addToCart(this.item, sizeId);
-    // for (let i = 0; i < this.item.size.length; i++) {
-    //   if (this.item.size[i].includes(sizeId)) {
-    //     this.isSizeIdIncluded = true;
-    //     this.sizeIndex = i;
-    //   }
-    // }
-    // if (this.isSizeIdIncluded == true) {
-    //   this.item.size[this.sizeIndex][1]++;
-    // } else {
-    //   this.cartService.addToCart(this.item);
-    //   this.item.size[this.item.size.length - 1][1]++;
-    // }
-    // this.item.size[0] = sizeId;
-    // console.log(sizeId);
-    // if (
-    /* [0: 'label', 1:'number item'] */
-    //   !this.cartService.getCartBySizeValue().includes(this.item.size[0])
-    // ) {
-    //   this.cartService.getCartBySize();
-    //   console.log(this.item.size[0]);
-    // have to change back the '==1' to 0
-    //   this.cartService.addToCart(this.item);
-    //   this.item.size[1]++;
-    //   console.log(this.cartService.getCartBySizeValue());
-    // } else if (
-    //   this.cartService.getCartBySizeValue().includes(this.item.size[0])
-    // ) {
-    //   this.cartService.getCartBySize();
-    // this.cartService.removeFromCart(this.item);
-    // this.item.size[1]++;
-    //   console.log(this.item.size[0]);
-    //   console.log(this.cartService.getCartBySize());
-    // }
   }
 }

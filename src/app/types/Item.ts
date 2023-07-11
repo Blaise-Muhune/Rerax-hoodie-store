@@ -11,6 +11,12 @@ export interface Item {
     addedTocartDate: string;
     howMany: number;
   };
-  size: [[string, number]];
+  size: [[string, number, boolean]];
   currentIndex: [number];
+  xs: boolean;
+  s: boolean;
+  m: boolean;
+  l: boolean;
+  xl: boolean;
+  xxl: boolean;
 }

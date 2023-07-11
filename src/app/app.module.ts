@@ -18,6 +18,11 @@ import { ProductService } from './product.service';
 import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
 import { BuyPageComponent } from './buy-page/buy-page.component';
+import { NgxPayPalModule } from 'ngx-paypal';
+import { CartBuyPageComponent } from './cart-buy-page/cart-buy-page.component';
+import { AccountComponent } from './account/account.component';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,14 +36,20 @@ import { BuyPageComponent } from './buy-page/buy-page.component';
     CartComponent,
     CartItemComponent,
     BuyPageComponent,
+    CartBuyPageComponent,
+    CartBuyPageComponent,
+    AccountComponent,
+    AccountComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSlideToggleModule,
     MatMenuModule,
     MatIconModule,
+    NgxPayPalModule,
   ],
   providers: [ProductService],
   bootstrap: [AppComponent],

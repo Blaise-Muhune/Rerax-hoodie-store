@@ -53,36 +53,7 @@ export class CartItemComponent {
       }, 1500);
     }
     console.log(itemFromSize);
-
-    // if (typeof this.myInputChange == 'number') {
-    //   this.inputChangeValues.unshift(this.myInputChange);
-    // }
-    // if (this.inputChangeValues.length > 1) {
-    //   // console.log('true');
-
-    //   if (this.inputChangeValues[0] > this.inputChangeValues[1]) {
-    //     // console.log('true');
-
-    //     this.tempTotal =
-    //       this.item.price *
-    //       (this.inputChangeValues[0] - this.inputChangeValues[1]);
-    //   } else if (this.inputChangeValues[0] < this.inputChangeValues[1]) {
-    //     this.tempTotal =
-    //       this.item.price *
-    //       -(this.inputChangeValues[1] - this.inputChangeValues[0]);
-    //     console.log(this.tempTotal);
-    //   }
-    // } else if (this.inputChangeValues.length == 1) {
-    //   this.tempTotal = this.item.price;
-    //   console.log('true');
-    // }
-    // this.tempTotal = this.cartService.getTotalCartItems();
     this.addRemoveOnchange.emit(this.cartService.getTotalCartItems());
-    // console.log(this.cartService.getTotalCartItems());
-
-    // this.inputChangeValues = [];
-
-    // console.log(this.item.currentIndex);
   }
 
   ngOnInit(): void {}

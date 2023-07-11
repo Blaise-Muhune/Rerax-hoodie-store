@@ -88,14 +88,67 @@ img {
   border: 1px solid black;
   padding: 2px 10px 2px 10px;
   border-radius: 10px;
+  background-color: white;
+}
+.clicked-item-button {
+  position: relative;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
 }
 
-.each-size-label:hover {
-  background-color: rgb(245, 245, 245);
-  cursor: pointer;
+.clicked-item-button:after {
+  content: attr(title);
+  color: black;
+  background: #ffffff;
+  display: block;
+  position: absolute;
+  /* padding-top: 100%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -70%; */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: all 0.8s;
+}
+
+.clicked-item-button:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s;
+}
+
+.clicked-item-button:disabled {
+  background-color: rgb(211, 203, 160);
+  color: white;
+  cursor: not-allowed;
+}
+
+.active-size:hover {
+  background-color: rgb(71, 71, 71);
+  color: white;
 }
 
 .image-container:hover img {
+}
+
+.active-size {
+  cursor: pointer;
+}
+
+.non-active-size {
+  border-color: rgb(184, 183, 183);
+  cursor: not-allowed;
+}
+
+.clicked-active-size {
+  background-color: black;
+  color: white;
 }
 
 @media screen and (max-width: 768px) {
@@ -143,13 +196,14 @@ img {
 
 .buy-now,
 .add-cart {
-  background-color: rgb(26, 25, 25);
-  color: white;
+  background-color: gold;
+  color: black;
   border: none;
   padding: 10px 15px;
   margin: 5px;
   font-size: 14px;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .counter {
@@ -164,5 +218,27 @@ button {
 
 span {
   /* margin: 0 10px; */
-  font-size: 18px;
+  font-size: 15px;
+}
+
+.price-and-ratings {
+  display: flex;
+  flex-direction: row;
+  margin-top: -10px;
+}
+
+.price-and-ratings > * {
+  margin-right: 5px;
+}
+
+.long-desc-and-number-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.number-item-container-input {
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
 }

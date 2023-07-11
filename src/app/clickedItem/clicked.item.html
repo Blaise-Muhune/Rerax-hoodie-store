@@ -19,30 +19,53 @@
     </div>
     <div class="description-item">
       <div class="size-bubble-container">
-        <div
-          *ngFor="let size of sizes"
-          (click)="handleAddToCart(getSizeId.innerText)"
-          class="each-size-label"
-        >
-          <div #getSizeId>{{ size.nameSize }}</div>
-          <span
-            *ngFor="let pairedSizeInfo of item.size"
-            class="number-item-size"
+        Size:
+        <div *ngFor="let size of sizes">
+          <button
+            [disabled]="!size.includeThisSize"
+            [title]=" !size.includeThisSize?'This size is out of stock':''"
+            (click)="getSelectedSize(getSizeId.innerText,size.includeThisSize)"
+            [class.clicked-active-size]="getSizeId.innerText == clickedActiveSize && size.includeThisSize"
+            [ngClass]="{ 'active-size': size.includeThisSize, 'non-active-size': !size.includeThisSize}"
+            class="each-size-label"
           >
-            {{ pairedSizeInfo[0] == size.nameSize ? pairedSizeInfo[1] : null }}
-          </span>
+            <div #getSizeId>{{ size.nameSize }}</div>
+          </button>
         </div>
         <div
-          style="color: rgb(233, 181, 37); padding-left: 10px; cursor: pointer"
+          style="color: rgb(175, 128, 0); padding-left: 10px; cursor: pointer"
+          [routerLink]="['/cart']"
         >
           go to cart
         </div>
       </div>
-      <div>
+      <div class="bottom-clicked-item">
         <div class="product-name">{{ item.name }}</div>
-        <span>5 ratings</span>
-        <span style="color: green"> {{ item.price | currency }} </span>
-        <div class="long-desc">{{ item.description }}</div>
+        <div class="price-and-ratings">
+          <span style="color: green">{{ item.price | currency }}</span>
+          <span>*****(5)</span>
+        </div>
+        <div class="long-desc-and-number-item">
+          <div class="long-desc">{{ item.description }}</div>
+          <div
+            [style.visibility]="displayNumber?'visible':'hidden'"
+            visibilty
+            class="number-item-container"
+          >
+            <input
+              [disabled]="clickedActiveSize ==''"
+              class="number-item-container-input"
+              type="number"
+              value="{{itemFromSize[1]}}"
+              [value]=""
+              (input)="onInputChange($event, item,clickedActiveSize)"
+              min="0"
+              max="999"
+              name=""
+              id=""
+            />
+          </div>
+        </div>
         <div class="actions">
           <!-- <div class="counter">
             <button (click)="decrementCounter()">-</button>
@@ -50,8 +73,22 @@
             <button (click)="incrementCounter()">+</button> __item(s)
           </div> -->
           <div>
-            <button class="buy-now">buy-now</button>
-            <button class="add-cart">add to cart</button>
+            <button
+              [title]="clickedActiveSize == ''?'Must choose size first':''"
+              [disabled]="clickedActiveSize == ''"
+              (click)="onItemClick(item, itemFromSize[1],clickedActiveSize)"
+              class="buy-now clicked-item-button"
+            >
+              buy-now
+            </button>
+            <button
+              [title]="clickedActiveSize == ''?'Must choose size first':'+1'"
+              [disabled]="clickedActiveSize == ''"
+              (click)="handleAddToCart(sizeLabel)"
+              class="add-cart clicked-item-button"
+            >
+              add to cart
+            </button>
           </div>
         </div>
       </div>

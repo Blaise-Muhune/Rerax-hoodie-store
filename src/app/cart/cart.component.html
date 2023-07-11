@@ -18,7 +18,9 @@
     <div class="total-label">Total: {{ total | currency }}</div>
     <div class="checkout-clearcart-container">
       <div (click)="removeAll()" class="clear-cart-button">clear cart</div>
-      <div class="checkout-label">Checkout</div>
+      <div [routerLink]="['/cartbuy/cart']" class="checkout-label">
+        Checkout
+      </div>
     </div>
   </div>
 </div>

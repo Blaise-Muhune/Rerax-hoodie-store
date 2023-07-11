@@ -1,0 +1,113 @@
+body {
+  background-color: black;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.account-main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  height: 100vh;
+  padding: 20px;
+  background-color: rgba(128, 128, 128, 0.123);
+}
+
+.sign-up,
+.log-in {
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 400px;
+  padding: 25px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+}
+
+input::placeholder {
+  color: gray;
+}
+
+button[type="submit"],
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: gold;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.my-account-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-picture img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.bonus-point {
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+.edit {
+  font-size: 14px;
+  margin-top: 5px;
+  /* color: gold; */
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.action-from-account button {
+  width: 150px;
+  margin-bottom: 10px;
+  /* background-color: gold; */
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.action-from-account button.cart {
+  /* background-color: black;
+  color: gold; */
+}
+
+span {
+  cursor: pointer;
+  color: rgb(0, 89, 255);
+}
