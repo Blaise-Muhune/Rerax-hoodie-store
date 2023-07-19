@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 import { of } from 'rxjs';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-account',
@@ -10,61 +10,26 @@ import { of } from 'rxjs';
   styleUrls: ['./account.component.css'],
 })
 export class AccountComponent implements OnInit {
-  constructor(private http: HttpClient, private router: Router) {}
-  haveAccount: boolean = true;
+  constructor(private http: HttpClient, private authService: AuthService) {}
+  haveAccount: boolean = false;
   loggedIn: boolean = false;
-  oldUser: boolean = false;
+  name: string = '';
 
   ngOnInit(): void {
-    // this.http.post('/api/users/', { firstName: 'blaise' }).subscribe({
-    //   next: (data) => {
-    //     console.log('response is: ', data);
-    //   },
-    //   error: (error) => {
-    //     console.error('error is: ', error);
-    //   },
-    // });
-    // this.http.get('/api/users/').subscribe({
-    //   next: (data) => {
-    //     console.log('response is: ', data);
-    //   },
-    //   error: (error) => {
-    //     console.error('error is: ', error);
-    //   },
-    // });
+    this.loggedIn = this.authService.getIsAuthenticated();
+    console.log(this.loggedIn);
   }
 
   signup(fname: string, lname: string, passoword: string, email: string) {
-    const userData = {
-      firstName: fname,
-      lastName: lname,
-      password: passoword,
-      email: email,
-    };
-    console.log(userData);
-
-    this.http.post('/api/users/signup', userData).subscribe({
-      next: (response) => {
-        console.log('succes', response);
-        this.router.navigate(['/']);
-      },
-      error: (error) => {
-        console.log('error', error);
-      },
-    });
+    this.authService.signupUser(fname, lname, email, passoword);
+    this.loggedIn = this.authService.getIsAuthenticated();
+    console.log(this.loggedIn);
   }
 
   login(email: string, password: string) {
-    console.log(email, password);
-    this.http.post('api/users/login', { email, password }).subscribe({
-      next: (data) => {
-        console.log('logged succes');
-        this.router.navigate(['/']);
-      },
-      error: (error) => {
-        console.log('something went wrong: ', error);
-      },
-    });
+    this.authService.loginUser(email, password);
+    this.loggedIn = this.authService.getIsAuthenticated();
+    console.log(this.loggedIn);
   }
   getUserData() {
     this.http.get('api/content').subscribe({
@@ -77,13 +42,32 @@ export class AccountComponent implements OnInit {
     });
   }
 
+  deleteAccount() {
+    this.http
+      .put('api/users/' + this.authService.getUserId(), {
+        firstName: 'm',
+        lastName: 'hn',
+        email: 'blaisemu7@gmail.com',
+        password: '111',
+      })
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+        },
+        error: (error) => {
+          console.log('errorr: ', error);
+        },
+      });
+
+    console.log(this.authService.getUserId());
+  }
+
   showSignUp() {
-    this.haveAccount = false;
+    this.haveAccount = !this.haveAccount;
   }
 
   showLogin() {
-    this.haveAccount = true;
-    this.loggedIn = false;
+    this.haveAccount = !this.haveAccount;
   }
 
   handleClick() {}

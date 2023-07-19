@@ -1,5 +1,5 @@
 <div class="account-main-container">
-  <div class="sign-up" *ngIf="haveAccount == false">
+  <div class="sign-up" *ngIf="!loggedIn && haveAccount">
     <div class="form">
       <input placeholder="First Name" type="text" name="" #firstname />
       <input placeholder="Last Name" type="text" name="" #lastname />
@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <div class="log-in" *ngIf="haveAccount == true && loggedIn == false">
+  <div class="log-in" *ngIf="!loggedIn && !haveAccount">
     <div class="form">
       <input placeholder="Email address" type="text" name="email" #emailLogin />
       <input
@@ -40,7 +40,7 @@
     </div>
   </div>
 
-  <div class="my-account-info" *ngIf="haveAccount == true && loggedIn == true">
+  <div class="my-account-info" *ngIf="loggedIn">
     <div class="profile">
       <div class="profile-picture">
         <img
@@ -48,14 +48,14 @@
           alt=""
         />
       </div>
-      <div class="name">Name</div>
+      <div class="name">name</div>
       <div class="bonus-point">23 points</div>
       <div class="edit">Edit</div>
     </div>
     <div class="action-from-account">
       <button class="cart">Cart</button>
       <button class="wishlist">Wishlist</button>
-      <button>Delete Account</button>
+      <button (click)="deleteAccount()">Delete Account</button>
     </div>
   </div>
 </div>
