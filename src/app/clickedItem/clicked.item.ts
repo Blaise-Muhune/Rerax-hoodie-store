@@ -34,7 +34,7 @@ export class ClickItem implements OnInit {
   displayNumber: boolean = false;
   sizeLabel: string = '';
   clickedActiveSize: string = ''; //DEFAULT SELECTION
-  itemFromSize: any[] = ['', 0, false];
+  itemFromSize: any = { label: '', numberIncart: 0 };
   myInputChange!: number;
   added: boolean = false;
 
@@ -106,15 +106,15 @@ export class ClickItem implements OnInit {
     this.cartService.addToCart(this.item, sizeId);
     this.added = !this.added;
     for (const size of this.item.size) {
-      if (size[0] == sizeId) {
-        this.itemFromSize[0] = size[0];
-        this.itemFromSize[1] = size[1];
+      if (size.label == sizeId) {
+        this.itemFromSize.label = size.label;
+        this.itemFromSize.numberIncart = size.numberIncart;
         break;
       }
     }
     let bool = false;
     for (let size of this.item.size) {
-      if (sizeId == size[0] && size[1] > 0) {
+      if (sizeId == size.label && size.numberIncart > 0) {
         bool = true;
       }
     }
@@ -126,17 +126,17 @@ export class ClickItem implements OnInit {
     this.clickedActiveSize = sizeLabel;
     this.itemFromSize = ['', 0, false];
     for (const size of this.item.size) {
-      if (size[0] == this.clickedActiveSize) {
-        this.itemFromSize[0] = size[0];
-        this.itemFromSize[1] = size[1];
-        this.itemFromSize[2] = size[2];
+      if (size.label == this.clickedActiveSize) {
+        this.itemFromSize.label = size.label;
+        this.itemFromSize.numberIncart = size.numberIncart;
+        // this.itemFromSize[2] = size[2];
         break;
       }
     }
-    if (this.itemFromSize[0] != '') {
+    if (this.itemFromSize.label != '') {
       for (const size of this.item.size) {
-        if (size[0] == this.clickedActiveSize) {
-          size[2] = true;
+        if (size.label == this.clickedActiveSize) {
+          // size[2] = true;
           break;
         }
       }
@@ -148,9 +148,9 @@ export class ClickItem implements OnInit {
 
   getNumberItemFunc(clickedActiveSize: string) {
     for (const size of this.item.size) {
-      if (size[0] == clickedActiveSize) {
-        this.itemFromSize[0] = size[0];
-        this.itemFromSize[1] = size[1];
+      if (size.label == clickedActiveSize) {
+        this.itemFromSize.label = size.label;
+        this.itemFromSize.numberIncart = size.numberIncart;
         break;
       }
     }
@@ -159,14 +159,14 @@ export class ClickItem implements OnInit {
   async onInputChange(event: Event, item: Item, clickedActiveSize: string) {
     if (this.clickedActiveSize != '') {
       for (const size of item.size) {
-        if (size[0] == '') {
-          size[0] = clickedActiveSize;
+        if (size.label == '') {
+          size.label = clickedActiveSize;
         }
         console.log(clickedActiveSize);
-        if (size[0] == clickedActiveSize) {
+        if (size.label == clickedActiveSize) {
           console.log(clickedActiveSize);
-          this.itemFromSize[0] = clickedActiveSize;
-          this.itemFromSize[1] = size[1];
+          this.itemFromSize.label = clickedActiveSize;
+          this.itemFromSize.numberIncart = size.numberIncart;
           break;
         }
       }
@@ -178,12 +178,12 @@ export class ClickItem implements OnInit {
       });
       this.myInputChange = parseInt(input.value);
       // console.log(this.myInputChange);
-      this.itemFromSize[1] = await this.myInputChange;
+      this.itemFromSize.numberIncart = await this.myInputChange;
 
       for (const size of this.item.size) {
-        if (size[0] == clickedActiveSize) {
-          size[0] = clickedActiveSize;
-          size[1] = this.itemFromSize[1];
+        if (size.label == clickedActiveSize) {
+          size.label = clickedActiveSize;
+          size.numberIncart = this.itemFromSize.numberIncart;
           break;
         }
         console.log(this.itemFromSize);

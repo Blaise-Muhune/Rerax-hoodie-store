@@ -37,7 +37,7 @@ export class CartItemComponent {
     private cartService: CartService
   ) {}
 
-  async onInputChange(event: Event, itemFromSize: any[], item: Item) {
+  async onInputChange(event: Event, itemFromSize: any, item: Item) {
     const input = event.target as HTMLInputElement;
     input.addEventListener('input', () => {
       let val = input.value;

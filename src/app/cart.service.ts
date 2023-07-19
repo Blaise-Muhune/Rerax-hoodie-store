@@ -14,6 +14,7 @@ export class CartService {
   sizes: any[] = ['XS', 'S', 'M', 'L', 'XL', '2XL'];
 
   constructor(private http: HttpClient, private authService: AuthService) {}
+
   addToCart(item: Item, sizeId: string) {
     let newSize = true;
     if (this.sizes.includes(sizeId)) {
@@ -22,27 +23,30 @@ export class CartService {
         // console.log('true it includs');
 
         item.size.forEach((sizeItem, i) => {
-          const sizeItemSize = sizeItem[0];
-          const sizeItemValue = sizeItem[1];
+          const sizeItemSize = sizeItem.label;
+          const sizeItemValue = sizeItem.numberIncart;
 
           if (sizeItemSize === sizeId) {
             // console.log('true it equal');
 
             // Modify the number based on your requirements
             // For example, increment the value by 1
-            sizeItem[1]++;
+            sizeItem.numberIncart++;
             this.total += item.price;
-            const data = {
-              updateWithThis: [sizeId, sizeItem[1], true],
-              outerIndex: this.cartItems.indexOf(item),
-              innerIndex: i,
-            };
-
             // const data = {
             //   updateWithThis: [sizeId, sizeItem[1], true],
-            //   outerIndex: item.id,
-            //   innerIndex: sizeId,
+            //   outerIndex: this.cartItems.indexOf(item),
+            //   innerIndex: i,
             // };
+
+            const data = {
+              updateWithThis: {
+                label: sizeId,
+                numberIncart: sizeItem.numberIncart,
+              },
+              outerId: item.id,
+              innerId: sizeId,
+            };
             this.http
               .put(
                 'api/users/updatesizecart/' + this.authService.getUserId(),
@@ -62,11 +66,11 @@ export class CartService {
         });
 
         if (newSize) {
+          item.size.unshift({ label: sizeId, numberIncart: 1 });
           const data = {
-            updateWithThis: [sizeId, 1, true],
-            outerIndex: this.cartItems.indexOf(item),
+            updateWithThis: { label: sizeId, numberIncart: 1 },
+            outerId: item.id,
           };
-          item.size.unshift([sizeId, 1, true]);
           this.http
             .put(
               'api/users/addFirstsizecart/' + this.authService.getUserId(),
@@ -85,8 +89,8 @@ export class CartService {
         console.log('no he dont');
 
         this.cartItems.unshift(item);
-        item.size[0][0] = sizeId;
-        item.size[0][1] = 1;
+        item.size[0].label = sizeId;
+        item.size[0].numberIncart = 1;
         this.total += item.price;
 
         this.http
@@ -107,10 +111,11 @@ export class CartService {
 
   getCartItems() {
     this.http
-      .get('api/users/cartitems/' + this.authService.getUserId())
+      .get<Item[]>('api/users/cartitems/' + this.authService.getUserId())
       .subscribe({
         next: (res) => {
           console.log(res);
+          this.cartItems = res;
         },
         error: (error) => {
           console.log('error at get al items', error);
@@ -121,6 +126,18 @@ export class CartService {
 
   removeAll(items: Item[]) {
     this.cartItems = [];
+    this.http
+      .delete(
+        'api/users/deleteallitemsfromcart/' + this.authService.getUserId()
+      )
+      .subscribe({
+        next: (res) => {
+          this.cartItems = [];
+        },
+        error: (error) => {
+          console.log('error at delete Items: ');
+        },
+      });
     this.total = 0;
     // this.getTotalCartItems();
   }
@@ -129,7 +146,7 @@ export class CartService {
     this.total = 0;
     this.cartItems.forEach((item) => {
       item.size.forEach((size) => {
-        this.total += item.price * size[1];
+        this.total += item.price * size.numberIncart;
       });
     });
     return this.total;
@@ -137,8 +154,8 @@ export class CartService {
 
   removeFromCart(item: Item, sizeLabel: string) {
     item.size.forEach((sizeItem, index) => {
-      const sizeItemLabel = sizeItem[0];
-      const sizeItemValue = sizeItem[1];
+      const sizeItemLabel = sizeItem.label;
+      const sizeItemValue = sizeItem.numberIncart;
       console.log(index);
 
       if (sizeItemLabel === sizeLabel) {
@@ -166,7 +183,7 @@ export class CartService {
     this.total = 0;
     this.cartItems.forEach((item) => {
       item.size.forEach((itemSize) => {
-        itemSize[1] != -1 ? (this.total += item.price) : null;
+        itemSize.numberIncart != -1 ? (this.total += item.price) : null;
       });
     });
   }

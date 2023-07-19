@@ -12,7 +12,7 @@
     <div class="opacity-element"></div>
     <div class="number-of-item-selector">
       <div class="size-label-cart-item">
-        {{ itemFromSize[0] }}
+        {{ itemFromSize.label }}
       </div>
       <div class="plus-and-minus-increment">
         <span>+</span>
@@ -24,7 +24,7 @@
         max="999"
         min="1"
         type="number"
-        value="{{ itemFromSize[1] }}"
+        value="{{ itemFromSize.numberIncart }}"
         (input)="onInputChange($event, itemFromSize, item)"
         #myQuantityInput
         name="quantity"
@@ -43,7 +43,7 @@
         <div class="add-buy-buttons">
           <button
             class="add-cart-button"
-            (click)="handleRemove(itemFromSize[0])"
+            (click)="handleRemove(itemFromSize.label)"
           >
             remove cart
           </button>

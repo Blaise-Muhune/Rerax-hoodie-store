@@ -1,11 +1,10 @@
 <div class="items-container">
   <h2 *ngIf="items.length == 0">
-    Nothing as been added to the wishlist. add by clicking on the heart
+    Like an item to add to Wish List
     <mat-icon
       style="margin-bottom: -5px"
       fontIcon="favorite_outline"
     ></mat-icon>
-    button on a product
   </h2>
   <div class="item-container" *ngFor="let item of items">
     <app-item [item]="item"></app-item>

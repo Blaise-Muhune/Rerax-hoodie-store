@@ -59,7 +59,9 @@
               class="number-item-size"
             >
               {{
-                pairedSizeInfo[0] == size.nameSize ? pairedSizeInfo[1] : null
+                pairedSizeInfo.label == size.nameSize
+                  ? pairedSizeInfo.numberIncart
+                  : null
               }}
             </span>
           </button>
