@@ -48,13 +48,13 @@
           alt=""
         />
       </div>
-      <div class="name">name</div>
+      <div class="name">Name: {{ name }}</div>
       <div class="bonus-point">23 points</div>
       <div class="edit">Edit</div>
     </div>
     <div class="action-from-account">
       <button class="cart">Cart</button>
-      <button class="wishlist">Wishlist</button>
+      <button class="logout" (click)="logout()">Log out</button>
       <button (click)="deleteAccount()">Delete Account</button>
     </div>
   </div>

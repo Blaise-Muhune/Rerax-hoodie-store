@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from '../cart.service';
 import { Item } from '../types/Item';
 import { ProductService } from '../product.service';
@@ -8,7 +8,7 @@ import { ProductService } from '../product.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
-export class CartComponent {
+export class CartComponent implements OnInit {
   items: Item[] = this.cartService.getCartItems();
   total: number = this.cartService.getTotalCartItems();
   nameItems: string[] = [];
@@ -25,8 +25,12 @@ export class CartComponent {
     //     this.itemsUsedElementToRender.push(item);
     //   }
     // });
+    console.log('cart before: ', this.cartService.getCartItems());
+
     // this.calculateTotal();
+    this.cartService.getCartItems();
     this.total = this.cartService.getTotalCartItems();
+    console.log('cart after: ', this.cartService.getCartItems());
   }
 
   calculateTotal(): void {}

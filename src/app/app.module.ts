@@ -21,7 +21,9 @@ import { BuyPageComponent } from './buy-page/buy-page.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { CartBuyPageComponent } from './cart-buy-page/cart-buy-page.component';
 import { AccountComponent } from './account/account.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { BeforeUnloadService } from './before-unload.service';
+import { AuthInterceptor } from './auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,11 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     NgxPayPalModule,
   ],
-  providers: [ProductService],
+  providers: [
+    ProductService,
+    BeforeUnloadService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -13,8 +13,14 @@
 }
 
 .item-container:hover .hover-item-element {
-  height: 120px;
-  background-color: rgba(0, 0, 0, 0.842);
+  /* height: 120px; */
+  /* background-color: rgba(0, 0, 0, 0.842);
+   */
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(0, 0, 0, 0.897) 70%
+  );
 }
 
 .hover-item-element {
@@ -29,8 +35,13 @@
   width: 100%;
   height: 115px;
   padding-bottom: 10px;
-  background-color: rgba(0, 0, 0, 0.281);
-  transition: height 0.5s;
+  /* background-color: rgba(0, 0, 0, 0.281); */
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(0, 0, 0, 0.87) 80%
+  );
+  transition: backgroundImage 0.5s;
 }
 
 .hover-item-element > * {
@@ -41,7 +52,7 @@
 
 .img {
   /* width: 33.3vw; */
-  height: 80vh;
+  height: 400px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -106,20 +117,35 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
 
   font-weight: 500;
   font-size: 14px;
   padding: 7px;
-  border-radius: 5px;
-  background-color: gold;
+  border-radius: 2px;
   margin: 10px 10px 10px 0;
+  border: 1px solid white;
+}
+
+.buy-now {
+  border: none;
+  cursor: pointer;
+
+  font-weight: 500;
+  font-size: 14px;
+  padding: 7px;
+  border-radius: 2px;
+  /* background-color: rgb(214, 218, 199); */
+  /* background-color: gold; */
+  margin: 10px 10px 10px 0;
+  background-color: green;
+  color: white;
 }
 
 .add-cart-button:hover {
-  color: rgb(226, 155, 0);
+  color: rgb(255, 255, 255);
 
-  background-color: rgba(255, 255, 255, 0.219);
+  background-color: rgba(255, 255, 255, 0.041);
 }
 
 .bottom-item {
@@ -138,7 +164,7 @@
   right: 0;
   bottom: 0;
   width: 75%;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.445);
 }
 
 .each-size-label {
@@ -153,7 +179,7 @@
   border-radius: 15px;
   cursor: pointer;
   /* width: 45%; */
-  border-right: 1px solid aliceblue;
+  border-right: 5px solid aliceblue;
   position: relative;
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
@@ -165,7 +191,7 @@
   margin-left: 2px;
 }
 .each-size-label:hover {
-  color: rgb(255, 211, 146);
+  color: rgb(150, 150, 150);
 }
 
 .each-size-label:after {
@@ -234,7 +260,7 @@
 .add-wishlist-icon {
   font-size: 18px;
   cursor: pointer;
-  color: rgb(233, 25, 25);
+  /* color: rgb(233, 25, 25); */
 }
 
 @media screen and (max-width: 768px) {

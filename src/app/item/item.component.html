@@ -23,19 +23,11 @@
           <button class="add-cart-button" (click)="showSizeContainer()">
             add to cart
           </button>
-          <button class="add-cart-button" (click)="onItemClick(item)">
-            Buy now
-          </button>
+          <button class="buy-now" (click)="onItemClick(item)">Buy now</button>
         </div>
-        <div *ngIf="!item.isWished" class="add-to-wishlist">
-          <mat-icon
-            (click)="handleAddToWishlist()"
-            style="color: white"
-            class="add-wishlist-icon"
-            fontIcon="favorite_outline"
-          ></mat-icon>
-        </div>
-        <div *ngIf="item.isWished" class="add-to-wishlist">
+        <div
+          [style.color]="item.isWished ? 'red' : 'rgba(255, 255, 255, 0.616)'"
+        >
           <mat-icon
             (click)="handleAddToWishlist()"
             class="add-wishlist-icon"
@@ -54,29 +46,19 @@
             class="each-size-label"
           >
             <div #getSizeId>{{ size.nameSize }}</div>
-            <span
-              *ngFor="let pairedSizeInfo of item.size"
-              class="number-item-size"
-            >
-              {{
-                pairedSizeInfo.label == size.nameSize
-                  ? pairedSizeInfo.numberIncart
-                  : null
-              }}
-            </span>
           </button>
         </div>
         <div
           [routerLink]="['/cart']"
-          style="color: rgb(233, 181, 37); padding-left: 10px; cursor: pointer"
+          style="color: rgb(255, 255, 255); padding-left: 10px; cursor: pointer"
         >
           go to cart
         </div>
         <div
           (click)="showSizeContainer()"
-          style="color: rgb(233, 37, 37); padding-left: 10px; cursor: pointer"
+          style="color: rgb(255, 0, 0); padding-left: 10px; cursor: pointer"
         >
-          close
+          X
         </div>
       </div>
     </div>

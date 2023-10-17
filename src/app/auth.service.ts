@@ -13,9 +13,13 @@ export class AuthService {
   private isAuthenticated = false;
   private logoutTimer: any;
   private userID!: string;
+  private user!: SignUpModel;
 
   getUserId() {
     return this.userID;
+  }
+  getUser() {
+    return this.user;
   }
   getIsAuthenticated() {
     return this.isAuthenticated;
@@ -43,7 +47,10 @@ export class AuthService {
     };
 
     this.http
-      .post<{ message: string; userId: string }>('/api/users/signup', authData)
+      .post<{ message: string; userId: string; user: SignUpModel }>(
+        '/api/users/signup',
+        authData
+      )
       .subscribe({
         next: (response) => {
           console.log('succes', response.message);
@@ -52,6 +59,8 @@ export class AuthService {
           // this.haveAccount = true;
           this.userID = response.userId;
           this.isAuthenticated = true;
+          this.user = response.user;
+          console.log(response.user);
         },
         error: (error) => {
           console.log('error', error);
@@ -63,17 +72,20 @@ export class AuthService {
     const authData: LoginModel = { email: email, password: password };
 
     this.http
-      .post<{ token: string; expiresIn: number; userID: string }>(
-        'api/users/login',
-        authData
-      )
+      .post<{
+        token: string;
+        expiresIn: number;
+        userID: string;
+        user: SignUpModel;
+      }>('api/users/login', authData)
       .subscribe({
         next: (res) => {
           console.log('logged success');
           this.userID = res.userID;
-          // console.log(res);
-
+          this.token = res.token;
           // console.log(res.token);
+          this.user = res.user;
+          console.log(res.user);
           // this.router.navigate(['/']);
 
           this.authenticatedSub.next(true);
@@ -98,6 +110,7 @@ export class AuthService {
     this.router.navigate(['/']);
     clearTimeout(this.logoutTimer);
     this.clearLoginDetails();
+    console.log('succes log out');
   }
 
   storeLoginDetails(token: string, expirationDate: Date) {

@@ -46,13 +46,14 @@ export class CartItemComponent {
     });
     this.myInputChange = parseInt(input.value == '' ? '1' : input.value);
     // console.log(this.myInputChange);
-    itemFromSize[1] = await this.myInputChange;
+    itemFromSize.numberIncart = await this.myInputChange;
     if (this.myInputChange == 0) {
       setTimeout(() => {
-        this.cartService.removeFromCart(item, itemFromSize[0]);
+        this.cartService.removeFromCart(item, itemFromSize.label);
       }, 1500);
     }
     console.log(itemFromSize);
+
     this.addRemoveOnchange.emit(this.cartService.getTotalCartItems());
   }
 

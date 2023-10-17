@@ -71,9 +71,11 @@ export class ItemComponent {
   handleAddToWishlist() {
     this.item.isWished = !this.item.isWished;
 
-    this.wishlistService.getWishlistItems().includes(this.item)
-      ? this.wishlistService.removeFromWishlist(this.item)
-      : this.wishlistService.addToWishlist(this.item);
+    if (this.wishlistService.getWishListId().includes(this.item.id)) {
+      this.wishlistService.removeFromWishlist(this.item);
+    } else {
+      this.wishlistService.addToWishlist(this.item);
+    }
   }
 
   showSizeContainer() {
