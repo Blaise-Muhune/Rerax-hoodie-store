@@ -4,6 +4,7 @@ import { ItemsComponent } from './items/items.component';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { WishlistService } from './wishlist.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +12,8 @@ import { WishlistService } from './wishlist.service';
 export class CartService {
   total: number = 0;
   idItemsInCart: any[] = [];
-
   private cartItems: Item[] = [];
+  cartItemsSubject = new BehaviorSubject<Item[]>([]);
   sizes: any[] = ['XS', 'S', 'M', 'L', 'XL', '2XL'];
 
   constructor(
@@ -72,6 +73,7 @@ export class CartService {
       this.getTotalCartItems();
       this.calculateTotal;
     }
+    // this.cartItemsSubject.next(this.cartItems);
   }
 
   sendCurrentUpdate() {
@@ -91,6 +93,7 @@ export class CartService {
   }
 
   getCartItems() {
+    this.cartItemsSubject.next(this.cartItems);
     return this.cartItems;
   }
 
@@ -135,6 +138,8 @@ export class CartService {
     // this.total -= item.price;
     // this.calculateTotal();
     // this.getTotalCartItems();
+
+    // this.cartItemsSubject.next(this.cartItems);
   }
   removeAll(items: Item[]) {
     this.cartItems = [];

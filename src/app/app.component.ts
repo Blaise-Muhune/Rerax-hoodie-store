@@ -32,15 +32,15 @@ export class AppComponent implements OnInit {
     this.prevScrollPos = currentScrollPos;
   }
   // send to db on unload or refresh
-  @HostListener('window:beforeunload', ['$event'])
-  beforeUnloadHandler(event: Event) {
-    if (event.type === 'beforeunload') {
-      this.cartService.sendCurrentUpdate();
+  // @HostListener('window:beforeunload', ['$event'])
+  // beforeUnloadHandler(event: Event) {
+  //   if (event.type === 'beforeunload') {
+  //     this.cartService.sendCurrentUpdate();
 
-      console.log(event.type);
-    }
-    console.log(event.type);
-    event.preventDefault();
-  }
+  //     console.log(event.type);
+  //   }
+  //   console.log(event.type);
+  //   event.preventDefault();
+  // }
   title = 'my-app';
 }
